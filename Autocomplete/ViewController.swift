@@ -26,29 +26,9 @@ class ViewController: UIViewController {
 
         if self.isFirstLoad {
             self.isFirstLoad = false
-            self.autoCompleteViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("autocompleteScene") as! AutoCompleteViewController
-
-            self.autoCompleteViewController.delegate = self
-            
-            self.autoCompleteViewController.willMoveToParentViewController(self)
-            self.addChildViewController(self.autoCompleteViewController)
-            self.autoCompleteViewController.didMoveToParentViewController(self)
-
-            self.autoCompleteViewController.view.frame.size.width = self.autocompleteContainerView.frame.size.width
-            self.autoCompleteViewController.view.willMoveToSuperview(self.autocompleteContainerView)
-            self.autocompleteContainerView.addSubview(self.autoCompleteViewController.view)
-            self.autoCompleteViewController.view.didMoveToSuperview()
+            Autocomplete.attachToViewController(self, autoCompleteContainerView: self.autocompleteContainerView)
         }
     }
-
-    
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 
 extension ViewController: AutocompleteDelegate {

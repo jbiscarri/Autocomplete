@@ -46,8 +46,18 @@ public class AutoCompleteViewController: UIViewController {
                 self.view.hidden = false
                 guard let searchTerm = textField.text else { return }
                 self.autocompleteItem = self.delegate!.autoCompleteItemsForSearchTerm(searchTerm)
+                let animationDuration: NSTimeInterval = 0.3
+                UIView.animateWithDuration(animationDuration,
+                    delay: 0.0,
+                    options: .CurveEaseInOut,
+                    animations: { () -> Void in
+                        self.view.frame.size.height = CGFloat(self.autocompleteItem!.count) * CGFloat(44.0)
+                    },
+                    completion: nil)
+
                 UIView.transitionWithView(self.tableView,
-                    duration: 0.3, options: UIViewAnimationOptions.TransitionCrossDissolve,
+                    duration: 0.3,
+                    options: .TransitionCrossDissolve,
                     animations: { () -> Void in
                         self.tableView.reloadData()
                     },
