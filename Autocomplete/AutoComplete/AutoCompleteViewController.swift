@@ -11,9 +11,8 @@ public protocol AutocompleteDelegate {
     func autoCompleteTextField() -> UITextField
     func autoCompleteThreshold(textField: UITextField) -> Int
     func autoCompleteItemsForSearchTerm(term: String) -> [(text: String, image: UIImage?)]
+    func autoCompleteFrame() -> CGRect
 }
-
-
 
 public class AutoCompleteViewController: UIViewController {
     //MARK: - outlets
@@ -33,6 +32,7 @@ public class AutoCompleteViewController: UIViewController {
 
         self.view.hidden = true
         self.textField = self.delegate!.autoCompleteTextField()
+        self.view.frame = self.delegate!.autoCompleteFrame()
 
         self.textField?.addTarget(self, action: "textDidChange:", forControlEvents: UIControlEvents.EditingChanged)
         self.autocompleteThreshold = self.delegate!.autoCompleteThreshold(self.textField!)

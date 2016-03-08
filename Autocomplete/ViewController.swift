@@ -26,7 +26,7 @@ class ViewController: UIViewController {
 
         if self.isFirstLoad {
             self.isFirstLoad = false
-            Autocomplete.attachToViewController(self, autoCompleteContainerView: self.autocompleteContainerView)
+            Autocomplete.setupAutocompleteForViewcontroller(self)
         }
     }
 }
@@ -50,5 +50,12 @@ extension ViewController: AutocompleteDelegate {
         }
 
         return countriesAndFlags
+    }
+
+    func autoCompleteFrame() -> CGRect {
+        return CGRect(x: CGRectGetMinX(self.countriesTextField.frame),
+            y: CGRectGetMaxY(self.countriesTextField.frame),
+            width: CGRectGetWidth(self.countriesTextField.frame),
+            height: CGRectGetHeight(self.view.frame)/3.0)
     }
 }
