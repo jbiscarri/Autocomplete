@@ -7,11 +7,21 @@
 //
 
 import UIKit
+
+let AutocompleteCellReuseIdentifier = "autocompleteCell"
+
 public protocol AutocompleteDelegate {
     func autoCompleteTextField() -> UITextField
     func autoCompleteThreshold(textField: UITextField) -> Int
     func autoCompleteItemsForSearchTerm(term: String) -> [(text: String, image: UIImage?)]
     func autoCompleteFrame() -> CGRect
+    func nibForAutoCompleteCell() -> UINib
+}
+
+extension AutocompleteDelegate {
+    func nibForAutoCompleteCell() -> UINib {
+        return UINib(nibName: "DefaultAutoCompleteCell", bundle: NSBundle(forClass: AutoCompleteViewController.self))
+    }
 }
 
 public class AutoCompleteViewController: UIViewController {
@@ -33,6 +43,7 @@ public class AutoCompleteViewController: UIViewController {
         self.view.hidden = true
         self.textField = self.delegate!.autoCompleteTextField()
         self.view.frame = self.delegate!.autoCompleteFrame()
+        self.tableView.registerNib(self.delegate!.nibForAutoCompleteCell(), forCellReuseIdentifier: AutocompleteCellReuseIdentifier)
 
         self.textField?.addTarget(self, action: "textDidChange:", forControlEvents: UIControlEvents.EditingChanged)
         self.autocompleteThreshold = self.delegate!.autoCompleteThreshold(self.textField!)
@@ -46,7 +57,7 @@ public class AutoCompleteViewController: UIViewController {
                 self.view.hidden = false
                 guard let searchTerm = textField.text else { return }
                 self.autocompleteItem = self.delegate!.autoCompleteItemsForSearchTerm(searchTerm)
-                let animationDuration: NSTimeInterval = 0.3
+                let animationDuration: NSTimeInterval = 0.2
                 UIView.animateWithDuration(animationDuration,
                     delay: 0.0,
                     options: .CurveEaseInOut,
@@ -56,7 +67,7 @@ public class AutoCompleteViewController: UIViewController {
                     completion: nil)
 
                 UIView.transitionWithView(self.tableView,
-                    duration: 0.3,
+                    duration: animationDuration,
                     options: .TransitionCrossDissolve,
                     animations: { () -> Void in
                         self.tableView.reloadData()

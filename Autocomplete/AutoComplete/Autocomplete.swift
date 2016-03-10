@@ -19,7 +19,6 @@ public class Autocomplete {
         viewController.addChildViewController(autoCompleteViewController)
         autoCompleteViewController.didMoveToParentViewController(viewController)
 
-//        autoCompleteViewController.view.frame.size.width = autoCompleteContainerView.frame.size.width
         autoCompleteViewController.view.willMoveToSuperview(viewController.view)
         viewController.view.addSubview(autoCompleteViewController.view)
         autoCompleteViewController.view.didMoveToSuperview()

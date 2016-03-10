@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5F2A54CC1C8D413800515DED /* Autocomplete.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F2A54CB1C8D413800515DED /* Autocomplete.storyboard */; };
 		5F2A54CE1C8D506700515DED /* Autocomplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2A54CD1C8D506700515DED /* Autocomplete.swift */; };
+		5F906B951C91342800CEE5C3 /* DefaultAutoCompleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F906B941C91342800CEE5C3 /* DefaultAutoCompleteCell.xib */; };
 		5FDF3D521C8CEE600038D01A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDF3D511C8CEE600038D01A /* AppDelegate.swift */; };
 		5FDF3D541C8CEE600038D01A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDF3D531C8CEE600038D01A /* ViewController.swift */; };
 		5FDF3D571C8CEE600038D01A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FDF3D551C8CEE600038D01A /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		5F2A54CB1C8D413800515DED /* Autocomplete.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Autocomplete.storyboard; sourceTree = "<group>"; };
 		5F2A54CD1C8D506700515DED /* Autocomplete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Autocomplete.swift; sourceTree = "<group>"; };
+		5F906B941C91342800CEE5C3 /* DefaultAutoCompleteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultAutoCompleteCell.xib; sourceTree = "<group>"; };
 		5FDF3D4E1C8CEE600038D01A /* Autocomplete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Autocomplete.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FDF3D511C8CEE600038D01A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FDF3D531C8CEE600038D01A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				5FDF3D6E1C8CFD360038D01A /* TableViewDatasource.swift */,
 				5F2A54CB1C8D413800515DED /* Autocomplete.storyboard */,
 				5F2A54CD1C8D506700515DED /* Autocomplete.swift */,
+				5F906B941C91342800CEE5C3 /* DefaultAutoCompleteCell.xib */,
 			);
 			path = AutoComplete;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 				5FDF3D5C1C8CEE600038D01A /* LaunchScreen.storyboard in Resources */,
 				5FDF3D591C8CEE600038D01A /* Assets.xcassets in Resources */,
 				5FDF3D571C8CEE600038D01A /* Main.storyboard in Resources */,
+				5F906B951C91342800CEE5C3 /* DefaultAutoCompleteCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

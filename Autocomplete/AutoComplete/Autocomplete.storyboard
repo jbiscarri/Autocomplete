@@ -3,9 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Auto Complete View Controller-->
@@ -24,42 +21,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="autocompleteCell" rowHeight="44" id="reM-fI-kgv" customClass="AutoCompleteCell" customModule="Autocomplete" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="reM-fI-kgv" id="ZOC-sq-mZu">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3NK-bX-cS2">
-                                                    <rect key="frame" x="8" y="12" width="550" height="19.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AF3-R5-YuE">
-                                                    <rect key="frame" x="566" y="9" width="26" height="26.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="AF3-R5-YuE" secondAttribute="height" multiplier="1:1" id="7lZ-mQ-NKc"/>
-                                                    </constraints>
-                                                </imageView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="AF3-R5-YuE" firstAttribute="trailing" secondItem="ZOC-sq-mZu" secondAttribute="trailingMargin" id="7XG-tp-7dB"/>
-                                                <constraint firstAttribute="leadingMargin" secondItem="3NK-bX-cS2" secondAttribute="leading" id="Mre-1k-FLV"/>
-                                                <constraint firstItem="AF3-R5-YuE" firstAttribute="height" secondItem="ZOC-sq-mZu" secondAttribute="height" multiplier="0.6" id="NxU-jQ-xwV"/>
-                                                <constraint firstItem="3NK-bX-cS2" firstAttribute="centerY" secondItem="ZOC-sq-mZu" secondAttribute="centerY" id="ctZ-mn-K5b"/>
-                                                <constraint firstItem="AF3-R5-YuE" firstAttribute="leading" secondItem="3NK-bX-cS2" secondAttribute="trailing" constant="8" id="lpH-F3-sAT"/>
-                                                <constraint firstItem="AF3-R5-YuE" firstAttribute="centerY" secondItem="3NK-bX-cS2" secondAttribute="centerY" id="ruo-Xt-vkh"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="imgIcon" destination="AF3-R5-YuE" id="BhC-0a-bLZ"/>
-                                            <outlet property="lblTitle" destination="3NK-bX-cS2" id="vaS-yv-HvD"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="9hN-Mv-9dW" id="7TF-fr-WHs"/>
                                     <outlet property="delegate" destination="9hN-Mv-9dW" id="s6N-Ma-euj"/>
