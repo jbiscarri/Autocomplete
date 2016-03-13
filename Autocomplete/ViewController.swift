@@ -39,14 +39,14 @@ extension ViewController: AutocompleteDelegate {
         return 1
     }
 
-    func autoCompleteItemsForSearchTerm(term: String) -> [(text: String, image: UIImage?)] {
+    func autoCompleteItemsForSearchTerm(term: String) -> [AutocompleteCellData] {
         let filteredCountries = self.countriesList.filter { (country) -> Bool in
             return country.lowercaseString.containsString(term.lowercaseString)
         }
 
-        let countriesAndFlags: [(text: String, image: UIImage?)] = filteredCountries.map { (var country) -> (String, UIImage?) in
+        let countriesAndFlags: [AutocompleteCellData] = filteredCountries.map { (var country) -> AutocompleteCellData in
             country.replaceRange(country.startIndex...country.startIndex, with: String(country.characters[country.startIndex]).capitalizedString)
-            return (country, UIImage(named: country))
+            return AutocompleteCellData(text: country, image: UIImage(named: country))
         }
 
         return countriesAndFlags

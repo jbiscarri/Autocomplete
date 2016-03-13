@@ -10,6 +10,10 @@
 		5F2A54CC1C8D413800515DED /* Autocomplete.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F2A54CB1C8D413800515DED /* Autocomplete.storyboard */; };
 		5F2A54CE1C8D506700515DED /* Autocomplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2A54CD1C8D506700515DED /* Autocomplete.swift */; };
 		5F906B951C91342800CEE5C3 /* DefaultAutoCompleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F906B941C91342800CEE5C3 /* DefaultAutoCompleteCell.xib */; };
+		5F9AEB421C9408F900AD1E7A /* AutocompleteCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9AEB411C9408F900AD1E7A /* AutocompleteCellData.swift */; };
+		5FB06A141C9297600024A7A3 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FB06A131C9297600024A7A3 /* CustomCell.xib */; };
+		5FB06A161C9298880024A7A3 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB06A151C9298880024A7A3 /* CustomCell.swift */; };
+		5FB06A181C929B190024A7A3 /* AutocompleteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB06A171C929B190024A7A3 /* AutocompleteDelegate.swift */; };
 		5FDF3D521C8CEE600038D01A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDF3D511C8CEE600038D01A /* AppDelegate.swift */; };
 		5FDF3D541C8CEE600038D01A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDF3D531C8CEE600038D01A /* ViewController.swift */; };
 		5FDF3D571C8CEE600038D01A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FDF3D551C8CEE600038D01A /* Main.storyboard */; };
@@ -26,6 +30,10 @@
 		5F2A54CB1C8D413800515DED /* Autocomplete.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Autocomplete.storyboard; sourceTree = "<group>"; };
 		5F2A54CD1C8D506700515DED /* Autocomplete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Autocomplete.swift; sourceTree = "<group>"; };
 		5F906B941C91342800CEE5C3 /* DefaultAutoCompleteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultAutoCompleteCell.xib; sourceTree = "<group>"; };
+		5F9AEB411C9408F900AD1E7A /* AutocompleteCellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteCellData.swift; sourceTree = "<group>"; };
+		5FB06A131C9297600024A7A3 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
+		5FB06A151C9298880024A7A3 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		5FB06A171C929B190024A7A3 /* AutocompleteDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutocompleteDelegate.swift; sourceTree = "<group>"; };
 		5FDF3D4E1C8CEE600038D01A /* Autocomplete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Autocomplete.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FDF3D511C8CEE600038D01A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FDF3D531C8CEE600038D01A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +86,8 @@
 				5FDF3D5A1C8CEE600038D01A /* LaunchScreen.storyboard */,
 				5FDF3D5D1C8CEE600038D01A /* Info.plist */,
 				5FDF3D631C8CF4220038D01A /* Countries.swift */,
+				5FB06A131C9297600024A7A3 /* CustomCell.xib */,
+				5FB06A151C9298880024A7A3 /* CustomCell.swift */,
 			);
 			path = Autocomplete;
 			sourceTree = "<group>";
@@ -92,6 +102,8 @@
 				5F2A54CB1C8D413800515DED /* Autocomplete.storyboard */,
 				5F2A54CD1C8D506700515DED /* Autocomplete.swift */,
 				5F906B941C91342800CEE5C3 /* DefaultAutoCompleteCell.xib */,
+				5FB06A171C929B190024A7A3 /* AutocompleteDelegate.swift */,
+				5F9AEB411C9408F900AD1E7A /* AutocompleteCellData.swift */,
 			);
 			path = AutoComplete;
 			sourceTree = "<group>";
@@ -154,6 +166,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FB06A141C9297600024A7A3 /* CustomCell.xib in Resources */,
 				5F2A54CC1C8D413800515DED /* Autocomplete.storyboard in Resources */,
 				5FDF3D5C1C8CEE600038D01A /* LaunchScreen.storyboard in Resources */,
 				5FDF3D591C8CEE600038D01A /* Assets.xcassets in Resources */,
@@ -169,13 +182,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F9AEB421C9408F900AD1E7A /* AutocompleteCellData.swift in Sources */,
 				5FDF3D691C8CFBEA0038D01A /* AutoCompleteViewController.swift in Sources */,
 				5FDF3D541C8CEE600038D01A /* ViewController.swift in Sources */,
 				5FDF3D641C8CF4220038D01A /* Countries.swift in Sources */,
 				5FDF3D6B1C8CFC0C0038D01A /* AutoCompleteCell.swift in Sources */,
+				5FB06A161C9298880024A7A3 /* CustomCell.swift in Sources */,
 				5FDF3D6D1C8CFD2D0038D01A /* TableViewDelegate.swift in Sources */,
 				5FDF3D521C8CEE600038D01A /* AppDelegate.swift in Sources */,
 				5FDF3D6F1C8CFD360038D01A /* TableViewDatasource.swift in Sources */,
+				5FB06A181C929B190024A7A3 /* AutocompleteDelegate.swift in Sources */,
 				5F2A54CE1C8D506700515DED /* Autocomplete.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

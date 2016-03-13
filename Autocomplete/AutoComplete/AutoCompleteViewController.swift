@@ -10,31 +10,22 @@ import UIKit
 
 let AutocompleteCellReuseIdentifier = "autocompleteCell"
 
-public protocol AutocompleteDelegate {
-    func autoCompleteTextField() -> UITextField
-    func autoCompleteThreshold(textField: UITextField) -> Int
-    func autoCompleteItemsForSearchTerm(term: String) -> [(text: String, image: UIImage?)]
-    func autoCompleteFrame() -> CGRect
-    func nibForAutoCompleteCell() -> UINib
-}
-
-extension AutocompleteDelegate {
-    func nibForAutoCompleteCell() -> UINib {
-        return UINib(nibName: "DefaultAutoCompleteCell", bundle: NSBundle(forClass: AutoCompleteViewController.self))
-    }
-}
-
 public class AutoCompleteViewController: UIViewController {
     //MARK: - outlets
     @IBOutlet private weak var tableView: UITableView!
 
+    //MARK: - internal items
+    internal var autocompleteItem: [AutocompleteCellData]?
+    internal var cellHeight: CGFloat?
+    internal var cellDataAssigner: ((cell: UITableViewCell, data: AutocompleteCellData) -> Void)?
+
     //MARK: - private properties
-    internal var autocompleteItem: [(text: String, image: UIImage?)]?
     private var textField: UITextField?
     private var autocompleteThreshold: Int?
+    private var maxHeight: CGFloat = 0
 
     //MARK: - public properties
-    public var delegate: AutocompleteDelegate?
+    public weak var delegate: AutocompleteDelegate?
 
     //MARK: - view life cycle
     override public func viewDidLoad() {
@@ -47,6 +38,11 @@ public class AutoCompleteViewController: UIViewController {
 
         self.textField?.addTarget(self, action: "textDidChange:", forControlEvents: UIControlEvents.EditingChanged)
         self.autocompleteThreshold = self.delegate!.autoCompleteThreshold(self.textField!)
+        self.cellDataAssigner = self.delegate!.getCellDataAssigner()
+
+        self.cellHeight = self.delegate!.heightForCells()
+        // not to go beyond bound height if list of items is too big
+        self.maxHeight = CGRectGetHeight(UIScreen.mainScreen().bounds) - CGRectGetMinY(self.view.frame)
     }
 
     //MARK: - private methods
@@ -62,7 +58,11 @@ public class AutoCompleteViewController: UIViewController {
                     delay: 0.0,
                     options: .CurveEaseInOut,
                     animations: { () -> Void in
-                        self.view.frame.size.height = CGFloat(self.autocompleteItem!.count) * CGFloat(44.0)
+                        self.view.frame.size.height = min(
+                            CGFloat(self.autocompleteItem!.count) *
+                            CGFloat(self.cellHeight!),
+                            self.maxHeight
+                        )
                     },
                     completion: nil)
 

@@ -13,7 +13,7 @@ public class AutoCompleteCell: UITableViewCell {
     @IBOutlet private weak var imgIcon: UIImageView!
 
     //MARK: - public properties
-    public var textImage: (text: String, image: UIImage?)? {
+    public var textImage: AutocompleteCellData? {
         didSet {
             self.lblTitle.text = textImage!.text
             self.imgIcon.image = textImage!.image

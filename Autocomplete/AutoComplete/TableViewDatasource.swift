@@ -27,8 +27,9 @@ extension AutoCompleteViewController: UITableViewDataSource {
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         assert(self.autocompleteItem != nil, "item array was unexpectedlly nil")
         let items = self.autocompleteItem!
-        let cell = tableView.dequeueReusableCellWithIdentifier("autocompleteCell", forIndexPath: indexPath) as! AutoCompleteCell
-        cell.textImage = items[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier("autocompleteCell", forIndexPath: indexPath)
+        let data = items[indexPath.row]
+        self.cellDataAssigner!(cell: cell, data: data)
         return cell
     }
 }
