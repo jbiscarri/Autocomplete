@@ -9,10 +9,10 @@
 import UIKit
 
 public class AutocompleteCellData {
-    let text: String
-    let image: UIImage?
+    public let text: String
+    public let image: UIImage?
 
-    init(text: String, image: UIImage?) {
+    public init(text: String, image: UIImage?) {
         self.text = text
         self.image = image
     }

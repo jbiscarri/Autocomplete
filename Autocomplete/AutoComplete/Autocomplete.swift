@@ -10,7 +10,9 @@ import UIKit
 public class Autocomplete {
     public class func setupAutocompleteForViewcontroller<T: UIViewController where T: AutocompleteDelegate>(viewController: T) {
 
-        let storyboard = UIStoryboard(name: "Autocomplete", bundle: NSBundle.mainBundle())
+        let podBundle: NSBundle = NSBundle(forClass: Autocomplete.self)
+
+        let storyboard = UIStoryboard(name: "Autocomplete", bundle: podBundle)
         let autoCompleteViewController = storyboard.instantiateViewControllerWithIdentifier("autocompleteScene") as! AutoCompleteViewController
         
         autoCompleteViewController.delegate = viewController

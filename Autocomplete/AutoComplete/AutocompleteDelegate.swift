@@ -12,7 +12,7 @@ public protocol AutocompleteDelegate: class {
     func autoCompleteTextField() -> UITextField
     func autoCompleteThreshold(textField: UITextField) -> Int
     func autoCompleteItemsForSearchTerm(term: String) -> [AutocompleteCellData]
-    func autoCompleteFrame() -> CGRect
+    func autoCompleteHeight() -> CGFloat
 
     func nibForAutoCompleteCell() -> UINib
     func heightForCells() -> CGFloat

@@ -23,6 +23,7 @@ public class AutoCompleteViewController: UIViewController {
     private var textField: UITextField?
     private var autocompleteThreshold: Int?
     private var maxHeight: CGFloat = 0
+    private var height: CGFloat = 0
 
     //MARK: - public properties
     public weak var delegate: AutocompleteDelegate?
@@ -33,7 +34,13 @@ public class AutoCompleteViewController: UIViewController {
 
         self.view.hidden = true
         self.textField = self.delegate!.autoCompleteTextField()
-        self.view.frame = self.delegate!.autoCompleteFrame()
+
+        self.height = self.delegate!.autoCompleteHeight()
+        self.view.frame = CGRect(x: CGRectGetMinX(self.textField!.frame),
+            y: CGRectGetMaxY(self.textField!.frame),
+            width: CGRectGetWidth(self.textField!.frame),
+            height: self.height)
+
         self.tableView.registerNib(self.delegate!.nibForAutoCompleteCell(), forCellReuseIdentifier: AutocompleteCellReuseIdentifier)
 
         self.textField?.addTarget(self, action: "textDidChange:", forControlEvents: UIControlEvents.EditingChanged)
@@ -59,9 +66,9 @@ public class AutoCompleteViewController: UIViewController {
                     options: .CurveEaseInOut,
                     animations: { () -> Void in
                         self.view.frame.size.height = min(
-                            CGFloat(self.autocompleteItem!.count) *
-                            CGFloat(self.cellHeight!),
-                            self.maxHeight
+                            CGFloat(self.autocompleteItem!.count) * CGFloat(self.cellHeight!),
+                            self.maxHeight,
+                            self.height
                         )
                     },
                     completion: nil)

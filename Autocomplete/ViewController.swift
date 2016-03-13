@@ -52,10 +52,7 @@ extension ViewController: AutocompleteDelegate {
         return countriesAndFlags
     }
 
-    func autoCompleteFrame() -> CGRect {
-        return CGRect(x: CGRectGetMinX(self.countriesTextField.frame),
-            y: CGRectGetMaxY(self.countriesTextField.frame),
-            width: CGRectGetWidth(self.countriesTextField.frame),
-            height: CGRectGetHeight(self.view.frame)/3.0)
+    func autoCompleteHeight() -> CGFloat {
+        return CGRectGetHeight(self.view.frame) / 3.0
     }
 }
