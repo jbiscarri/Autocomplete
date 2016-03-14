@@ -18,6 +18,7 @@ extension AutoCompleteViewController: UITableViewDelegate {
         self.textField?.text = selectedItem.text
         UIView.animateWithDuration(self.animationDuration, animations: { () -> Void in
                 self.view.frame.size.height = 0.0
+                self.textField?.endEditing(true)
             }) { (completed) -> Void in
                 self.delegate!.didSelectItem(selectedItem)
         }
