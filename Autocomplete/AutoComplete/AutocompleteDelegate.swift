@@ -11,12 +11,13 @@ import UIKit
 public protocol AutocompleteDelegate: class {
     func autoCompleteTextField() -> UITextField
     func autoCompleteThreshold(textField: UITextField) -> Int
-    func autoCompleteItemsForSearchTerm(term: String) -> [AutocompleteCellData]
+    func autoCompleteItemsForSearchTerm(term: String) -> [AutocompletableOption]
     func autoCompleteHeight() -> CGFloat
+    func didSelectItem(item: AutocompletableOption) -> Void
 
     func nibForAutoCompleteCell() -> UINib
     func heightForCells() -> CGFloat
-    func getCellDataAssigner() -> ((UITableViewCell, AutocompleteCellData) -> Void)
+    func getCellDataAssigner() -> ((UITableViewCell, AutocompletableOption) -> Void)
 }
 
 public extension AutocompleteDelegate {
@@ -28,11 +29,11 @@ public extension AutocompleteDelegate {
         return 60
     }
 
-    func getCellDataAssigner() -> ((UITableViewCell, AutocompleteCellData) -> Void) {
-        let assigner: ((UITableViewCell, AutocompleteCellData) -> Void) = {
-            (cell: UITableViewCell, cellDatadata: AutocompleteCellData) -> Void in
-            if let cell = cell as? AutoCompleteCell {
-                cell.textImage = cellDatadata
+    func getCellDataAssigner() -> ((UITableViewCell, AutocompletableOption) -> Void) {
+        let assigner: ((UITableViewCell, AutocompletableOption) -> Void) = {
+            (cell: UITableViewCell, cellData: AutocompletableOption) -> Void in
+            if let cell = cell as? AutoCompleteCell, cellData = cellData as? AutocompleteCellData {
+                cell.textImage = cellData
             }
         }
         return assigner

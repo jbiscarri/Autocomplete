@@ -15,12 +15,13 @@ public class AutoCompleteViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
 
     //MARK: - internal items
-    internal var autocompleteItem: [AutocompleteCellData]?
+    internal var autocompleteItems: [AutocompletableOption]?
     internal var cellHeight: CGFloat?
-    internal var cellDataAssigner: ((cell: UITableViewCell, data: AutocompleteCellData) -> Void)?
+    internal var cellDataAssigner: ((cell: UITableViewCell, data: AutocompletableOption) -> Void)?
+    internal var textField: UITextField?
+    internal let animationDuration: NSTimeInterval = 0.2    
 
     //MARK: - private properties
-    private var textField: UITextField?
     private var autocompleteThreshold: Int?
     private var maxHeight: CGFloat = 0
     private var height: CGFloat = 0
@@ -59,14 +60,13 @@ public class AutoCompleteViewController: UIViewController {
             if numberOfCharacters > self.autocompleteThreshold! {
                 self.view.hidden = false
                 guard let searchTerm = textField.text else { return }
-                self.autocompleteItem = self.delegate!.autoCompleteItemsForSearchTerm(searchTerm)
-                let animationDuration: NSTimeInterval = 0.2
-                UIView.animateWithDuration(animationDuration,
+                self.autocompleteItems = self.delegate!.autoCompleteItemsForSearchTerm(searchTerm)
+                UIView.animateWithDuration(self.animationDuration,
                     delay: 0.0,
                     options: .CurveEaseInOut,
                     animations: { () -> Void in
                         self.view.frame.size.height = min(
-                            CGFloat(self.autocompleteItem!.count) * CGFloat(self.cellHeight!),
+                            CGFloat(self.autocompleteItems!.count) * CGFloat(self.cellHeight!),
                             self.maxHeight,
                             self.height
                         )
@@ -74,7 +74,7 @@ public class AutoCompleteViewController: UIViewController {
                     completion: nil)
 
                 UIView.transitionWithView(self.tableView,
-                    duration: animationDuration,
+                    duration: self.animationDuration,
                     options: .TransitionCrossDissolve,
                     animations: { () -> Void in
                         self.tableView.reloadData()

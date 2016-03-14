@@ -29,6 +29,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtw-5D-QDr">
+                                <rect key="frame" x="300" y="300.5" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2uB-to-wOr">
                                 <rect key="frame" x="20" y="60" width="560" height="480"/>
                             </containerView>
@@ -37,6 +43,8 @@
                         <constraints>
                             <constraint firstItem="2uB-to-wOr" firstAttribute="leading" secondItem="W95-ki-yCv" secondAttribute="leading" id="6MD-XH-FT3"/>
                             <constraint firstItem="2uB-to-wOr" firstAttribute="top" secondItem="W95-ki-yCv" secondAttribute="bottom" id="9tQ-o4-5lG"/>
+                            <constraint firstItem="vtw-5D-QDr" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Gjz-v2-H0u"/>
+                            <constraint firstItem="vtw-5D-QDr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UfS-sl-xfB"/>
                             <constraint firstItem="W95-ki-yCv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="X7R-Ur-8OD"/>
                             <constraint firstItem="W95-ki-yCv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="iJF-W3-p7Z"/>
                             <constraint firstAttribute="trailingMargin" secondItem="W95-ki-yCv" secondAttribute="trailing" id="iMF-ik-IZV"/>
@@ -47,6 +55,7 @@
                     <connections>
                         <outlet property="autocompleteContainerView" destination="2uB-to-wOr" id="JKv-4R-6Ma"/>
                         <outlet property="countriesTextField" destination="W95-ki-yCv" id="O25-kB-ASY"/>
+                        <outlet property="lblSelectedCountryName" destination="vtw-5D-QDr" id="8ll-cT-HLt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
