@@ -1,8 +1,35 @@
-# iOS Autocomplete
-This is a jQuery like auto complete for iOS UITextField.
-I'm intending to expand it to be used as a stand-alone library. For now, feel free to modify and use it as you want until I convert it to an expandable, reusable component!
+# iOS Textfield Autocomplete
+This is a iOS auto complete for iOS UITextField written all in Swift.
+
+[Imgur](http://i.imgur.com/y8TfMEs.gifv)
+
+##Installation
+You can install it using CocoaPods
+
+pod install CCAutocomplete
 
 
-![Autocomplete demo](http://i.imgur.com/d2fqBND.gif?1)
+##Usage
+
+###AutocompleteDelegate
+The ViewController containing the UITextField should conform to `AutocompleteDelegate` protocol.
+The protocol contains following methods:
+
+####Required methods
+1. `func autoCompleteTextField() -> UITextField`: Returns UITextField we want to apply autocomplete for
+2. `func autoCompleteThreshold(textField: UITextField) -> Int`: Returns minimum number of characters to start showing autocomplete
+3. `func autoCompleteItemsForSearchTerm(term: String) -> [AutocompletableOption]`: Returns array of objects that conform to `AutocompletableOption` to be shown in the list of autocomplete
+4. `func autoCompleteHeight() -> CGFloat`: Maximum height which shows autocomplete items
+5. `func didSelectItem(item: AutocompletableOption) -> Void`: Is getting called when we tapped on the autocomplete item
 
 
+####Optional methods:
+
+1. `func nibForAutoCompleteCell() -> UINib`: Create a nib file containing custom UITableViewCell and return it from this method to customize autocomplete cell
+2. `func heightForCells() -> CGFloat`: height of custom autocomplete cells
+3. `func getCellDataAssigner() -> ((UITableViewCell, AutocompletableOption) -> Void)`: returns a method that instruct Autocomplete how to assign an object that conforms to `AutocompletableOption` to a subclass of a `UITableViewCell`
+
+
+###AutocompletableOption
+A protocol that uses for datasource of Autocomplete UITableViewCells.
+If you want to customize autocomplete cell to have more data items, you need to create an object that conforms to this.
