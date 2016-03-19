@@ -1,7 +1,7 @@
 # iOS Textfield Autocomplete
 This is a iOS auto complete for iOS UITextField written all in Swift.
 
-[Imgur](http://i.imgur.com/y8TfMEs.gif)
+[Imgur](http://i.giphy.com/xThuWaQyPdaVs4tvLa.gif)
 
 ##Installation
 You can install it using CocoaPods
