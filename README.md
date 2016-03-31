@@ -6,7 +6,7 @@ This is a iOS auto complete for iOS UITextField written all in Swift.
 ##Installation
 You can install it using CocoaPods
 
-`pod install CCAutocomplete`
+`pod 'CCAutocomplete'`
 
 
 ##Usage
