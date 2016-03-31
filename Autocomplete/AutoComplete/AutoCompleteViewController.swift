@@ -44,7 +44,7 @@ public class AutoCompleteViewController: UIViewController {
 
         self.tableView.registerNib(self.delegate!.nibForAutoCompleteCell(), forCellReuseIdentifier: AutocompleteCellReuseIdentifier)
 
-        self.textField?.addTarget(self, action: "textDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+        self.textField?.addTarget(self, action: #selector(UITextInputDelegate.textDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
         self.autocompleteThreshold = self.delegate!.autoCompleteThreshold(self.textField!)
         self.cellDataAssigner = self.delegate!.getCellDataAssigner()
 
