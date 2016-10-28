@@ -12,10 +12,10 @@ public protocol AutocompletableOption {
     var text: String { get }
 }
 
-public class AutocompleteCellData: AutocompletableOption {
-    private let _text: String
-    public var text: String { get { return _text } }
-    public let image: UIImage?
+open class AutocompleteCellData: AutocompletableOption {
+    fileprivate let _text: String
+    open var text: String { get { return _text } }
+    open let image: UIImage?
 
     public init(text: String, image: UIImage?) {
         self._text = text

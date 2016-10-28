@@ -9,8 +9,8 @@
 import UIKit
 
 class CustomCell: UITableViewCell {
-    @IBOutlet private weak var imgFlag: UIImageView!
-    @IBOutlet private weak var lblCountry: UILabel!
+    @IBOutlet fileprivate weak var imgFlag: UIImageView!
+    @IBOutlet fileprivate weak var lblCountry: UILabel!
 
     var country: String? {
         didSet {
