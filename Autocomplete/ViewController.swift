@@ -37,18 +37,18 @@ extension ViewController: AutocompleteDelegate {
     func autoCompleteTextField() -> UITextField {
         return self.countriesTextField
     }
-    func autoCompleteThreshold(textField: UITextField) -> Int {
+    func autoCompleteThreshold(_ textField: UITextField) -> Int {
         return 1
     }
 
-    func autoCompleteItemsForSearchTerm(term: String) -> [AutocompletableOption] {
+    func autoCompleteItemsForSearchTerm(_ term: String) -> [AutocompletableOption] {
         let filteredCountries = self.countriesList.filter { (country) -> Bool in
-            return country.lowercaseString.containsString(term.lowercaseString)
+            return country.lowercased().contains(term.lowercased())
         }
 
         let countriesAndFlags: [AutocompletableOption] = filteredCountries.map { ( country) -> AutocompleteCellData in
             var country = country
-            country.replaceRange(country.startIndex...country.startIndex, with: String(country.characters[country.startIndex]).capitalizedString)
+            country.replaceSubrange(country.startIndex...country.startIndex, with: String(country.characters[country.startIndex]).capitalized)
             return AutocompleteCellData(text: country, image: UIImage(named: country)) 
             }.map( { $0 as AutocompletableOption })
 
@@ -56,11 +56,11 @@ extension ViewController: AutocompleteDelegate {
     }
 
     func autoCompleteHeight() -> CGFloat {
-        return CGRectGetHeight(self.view.frame) / 3.0
+        return self.view.frame.height / 3.0
     }
 
 
-    func didSelectItem(item: AutocompletableOption) {
+    func didSelectItem(_ item: AutocompletableOption) {
         self.lblSelectedCountryName.text = item.text
     }
 }
