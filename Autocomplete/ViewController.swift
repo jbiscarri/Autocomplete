@@ -48,7 +48,7 @@ extension ViewController: AutocompleteDelegate {
 
         let countriesAndFlags: [AutocompletableOption] = filteredCountries.map { ( country) -> AutocompleteCellData in
             var country = country
-            country.replaceSubrange(country.startIndex...country.startIndex, with: String(country.characters[country.startIndex]).capitalized)
+            country.replaceSubrange(country.startIndex...country.startIndex, with: String(country[country.startIndex]).capitalized)
             return AutocompleteCellData(text: country, image: UIImage(named: country)) 
             }.map( { $0 as AutocompletableOption })
 

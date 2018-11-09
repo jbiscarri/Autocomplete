@@ -15,7 +15,7 @@ public protocol AutocompletableOption {
 open class AutocompleteCellData: AutocompletableOption {
     fileprivate let _text: String
     open var text: String { get { return _text } }
-    open let image: UIImage?
+    public let image: UIImage?
 
     public init(text: String, image: UIImage?) {
         self._text = text

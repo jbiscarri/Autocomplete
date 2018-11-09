@@ -33,11 +33,11 @@ open class Autocomplete {
     fileprivate class func setupUI(_ autoCompleteViewController: AutoCompleteViewController, parentViewController: UIViewController) {
         //Remove from any superview and super viewcontrollers
         autoCompleteViewController.view.removeFromSuperview()
-        autoCompleteViewController.removeFromParentViewController()
+        autoCompleteViewController.removeFromParent()
         
-        autoCompleteViewController.willMove(toParentViewController: parentViewController)
-        parentViewController.addChildViewController(autoCompleteViewController)
-        autoCompleteViewController.didMove(toParentViewController: parentViewController)
+        autoCompleteViewController.willMove(toParent: parentViewController)
+        parentViewController.addChild(autoCompleteViewController)
+        autoCompleteViewController.didMove(toParent: parentViewController)
         
         autoCompleteViewController.view.willMove(toSuperview: parentViewController.view)
         parentViewController.view.addSubview(autoCompleteViewController.view)

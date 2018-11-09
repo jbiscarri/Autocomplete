@@ -44,7 +44,7 @@ open class AutoCompleteViewController: UIViewController {
 
         self.tableView.register(self.delegate!.nibForAutoCompleteCell(), forCellReuseIdentifier: AutocompleteCellReuseIdentifier)
 
-        self.textField?.addTarget(self, action: #selector(UITextInputDelegate.textDidChange(_:)), for: UIControlEvents.editingChanged)
+        self.textField?.addTarget(self, action: #selector(UITextInputDelegate.textDidChange(_:)), for: UIControl.Event.editingChanged)
         self.autocompleteThreshold = self.delegate!.autoCompleteThreshold(self.textField!)
         self.cellDataAssigner = self.delegate!.getCellDataAssigner()
 
@@ -55,7 +55,7 @@ open class AutoCompleteViewController: UIViewController {
 
     //MARK: - private methods
     @objc func textDidChange(_ textField: UITextField) {
-        let numberOfCharacters = textField.text?.characters.count
+        let numberOfCharacters = textField.text?.count
         if let numberOfCharacters = numberOfCharacters {
             if numberOfCharacters > self.autocompleteThreshold! {
                 self.view.isHidden = false
@@ -63,7 +63,7 @@ open class AutoCompleteViewController: UIViewController {
                 self.autocompleteItems = self.delegate!.autoCompleteItemsForSearchTerm(searchTerm)
                 UIView.animate(withDuration: self.animationDuration,
                     delay: 0.0,
-                    options: UIViewAnimationOptions(),
+                    options: UIView.AnimationOptions(),
                     animations: { () -> Void in
                         self.view.frame.size.height = min(
                             CGFloat(self.autocompleteItems!.count) * CGFloat(self.cellHeight!),
