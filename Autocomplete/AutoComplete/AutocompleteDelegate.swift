@@ -14,6 +14,8 @@ public protocol AutocompleteDelegate: class {
     func autoCompleteItemsForSearchTerm(_ term: String) -> [AutocompletableOption]
     func autoCompleteHeight() -> CGFloat
     func didSelectItem(_ item: AutocompletableOption) -> Void
+    func animationForInsertion() -> UITableView.RowAnimation
+    func animationForDeletion() -> UITableView.RowAnimation
 
     func nibForAutoCompleteCell() -> UINib
     func heightForCells() -> CGFloat
@@ -37,5 +39,13 @@ public extension AutocompleteDelegate {
             }
         }
         return assigner
+    }
+    
+    func animationForInsertion() -> UITableView.RowAnimation {
+        return .fade
+    }
+    
+    func animationForDeletion() -> UITableView.RowAnimation {
+        return .fade
     }
 }

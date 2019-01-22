@@ -100,25 +100,17 @@ open class AutoCompleteViewController: UIViewController {
                 
                 self.tableView.beginUpdates()
                 if newSet.count != 0 && self.tableView.numberOfSections == 0 {
-                    self.tableView.insertSections(IndexSet(integer: 0), with: UITableView.RowAnimation.fade)
+                    self.tableView.insertSections(IndexSet(integer: 0), with: self.delegate?.animationForInsertion() ?? .fade)
                 }
                 
                 if newSet.count == 0 && self.tableView.numberOfSections > 0 {
-                    self.tableView.deleteSections(IndexSet(integer: 0), with: UITableView.RowAnimation.fade)
+                    self.tableView.deleteSections(IndexSet(integer: 0), with: self.delegate?.animationForInsertion() ?? .fade)
                 }
                 
-                self.tableView.insertRows(at: insertedIndexPaths, with: UITableView.RowAnimation.right)
-                self.tableView.deleteRows(at: removedIndexPaths, with: UITableView.RowAnimation.left)
+                self.tableView.insertRows(at: insertedIndexPaths, with: self.delegate?.animationForInsertion() ?? .fade)
+                self.tableView.deleteRows(at: removedIndexPaths, with: self.delegate?.animationForInsertion() ?? .fade)
                 self.tableView.endUpdates()
-
-//                UIView.transition(with: self.tableView,
-//                    duration: self.animationDuration,
-//                    options: .transitionCrossDissolve,
-//                    animations: { () -> Void in
-//                        self.tableView.reloadData()
-//                    },
-//                    completion: nil)
-
+                
             } else {
                 self.view.isHidden = true
             }
