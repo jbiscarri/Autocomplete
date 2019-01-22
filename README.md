@@ -32,6 +32,9 @@ The protocol contains following methods:
 5. `func animationForDeletion() -> UITableView.RowAnimation`: returns animation that is used when removing existing items from Autocomplete
 
 
-###AutocompletableOption
+### AutocompletableOption
 A protocol that uses for datasource of Autocomplete UITableViewCells.
 If you want to customize autocomplete cell to have more data items, you need to create an object that conforms to this.
+
+### TODOs
+There is a plan to add support multiple sections for Autocomplete. 
