@@ -19,7 +19,8 @@ open class AutoCompleteViewController: UIViewController {
     internal var cellHeight: CGFloat?
     internal var cellDataAssigner: ((_ cell: UITableViewCell, _ data: AutocompletableOption) -> Void)?
     internal var textField: UITextField?
-    internal let animationDuration: TimeInterval = 0.2    
+    internal let animationDuration: TimeInterval = 0.2
+    internal var currentSet = Set<String>()
 
     //MARK: - private properties
     fileprivate var autocompleteThreshold: Int?
@@ -60,7 +61,9 @@ open class AutoCompleteViewController: UIViewController {
             if numberOfCharacters > self.autocompleteThreshold! {
                 self.view.isHidden = false
                 guard let searchTerm = textField.text else { return }
-                self.autocompleteItems = self.delegate!.autoCompleteItemsForSearchTerm(searchTerm)
+                let newItems = self.delegate!.autoCompleteItemsForSearchTerm(searchTerm)
+                let oldItems = self.autocompleteItems
+                self.autocompleteItems = newItems
                 UIView.animate(withDuration: self.animationDuration,
                     delay: 0.0,
                     options: UIView.AnimationOptions(),
@@ -72,14 +75,49 @@ open class AutoCompleteViewController: UIViewController {
                         )
                     },
                     completion: nil)
+                
+                var removedIndexPaths = [IndexPath]()
+                let newSet = Set(newItems.map{ $0.text })
+                
+                if let autocompleteItems = oldItems {
+                    for i in stride(from: 0, to: autocompleteItems.count, by: 1) {
+                        if !newSet.contains(autocompleteItems[i].text) {
+                            removedIndexPaths.append(IndexPath(row: i, section: 0))
+                        }
+                    }
+                }
+                
+                
+                var insertedIndexPaths = [IndexPath]()
+                for i in stride(from: 0, to: newItems.count, by: 1) {
+                    if !currentSet.contains(newItems[i].text) {
+                        insertedIndexPaths.append(IndexPath(row: i, section: 0))
+                    }
+                }
+                
+                
+                currentSet = newSet
+                
+                self.tableView.beginUpdates()
+                if newSet.count != 0 && self.tableView.numberOfSections == 0 {
+                    self.tableView.insertSections(IndexSet(integer: 0), with: UITableView.RowAnimation.fade)
+                }
+                
+                if newSet.count == 0 && self.tableView.numberOfSections > 0 {
+                    self.tableView.deleteSections(IndexSet(integer: 0), with: UITableView.RowAnimation.fade)
+                }
+                
+                self.tableView.insertRows(at: insertedIndexPaths, with: UITableView.RowAnimation.right)
+                self.tableView.deleteRows(at: removedIndexPaths, with: UITableView.RowAnimation.left)
+                self.tableView.endUpdates()
 
-                UIView.transition(with: self.tableView,
-                    duration: self.animationDuration,
-                    options: .transitionCrossDissolve,
-                    animations: { () -> Void in
-                        self.tableView.reloadData()
-                    },
-                    completion: nil)
+//                UIView.transition(with: self.tableView,
+//                    duration: self.animationDuration,
+//                    options: .transitionCrossDissolve,
+//                    animations: { () -> Void in
+//                        self.tableView.reloadData()
+//                    },
+//                    completion: nil)
 
             } else {
                 self.view.isHidden = true
