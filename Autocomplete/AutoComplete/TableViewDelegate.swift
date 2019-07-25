@@ -16,11 +16,14 @@ extension AutoCompleteViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = self.autocompleteItems![(indexPath as NSIndexPath).row]
         self.textField?.text = selectedItem.text
+        self.closing = true
         UIView.animate(withDuration: self.animationDuration, animations: { () -> Void in
                 self.view.frame.size.height = 0.0
                 self.textField?.endEditing(true)
             }, completion: { (completed) -> Void in
                 self.delegate!.didSelectItem(selectedItem)
-        }) 
+                self.view.frame.size.height = 0.0
+
+        })
     }
 }

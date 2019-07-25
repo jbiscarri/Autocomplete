@@ -19,11 +19,9 @@ open class AutocompleteCellData: AutocompletableOption {
     
     open var text: String { get { return _text } }
     open var id: UUID { return _uuid }
-    public let image: UIImage?
 
     public init(uuid: UUID, text: String, image: UIImage?) {
         self._text = text
         self._uuid = uuid
-        self.image = image
     }
 }

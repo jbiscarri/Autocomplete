@@ -29,7 +29,8 @@ extension AutoCompleteViewController: UITableViewDataSource {
         let items = self.autocompleteItems!
         let cell = tableView.dequeueReusableCell(withIdentifier: "autocompleteCell", for: indexPath)
         let data = items[(indexPath as NSIndexPath).row]
-        self.cellDataAssigner!(cell, data)
+        self.cellDataAssigner!(cell, data)                
+        
         return cell
     }
 }

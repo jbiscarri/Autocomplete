@@ -19,8 +19,9 @@ open class AutoCompleteViewController: UIViewController {
     internal var cellHeight: CGFloat?
     internal var cellDataAssigner: ((_ cell: UITableViewCell, _ data: AutocompletableOption) -> Void)?
     internal var textField: UITextField?
-    internal let animationDuration: TimeInterval = 0.2
+    internal let animationDuration: TimeInterval = 0.3
     internal var currentSet = Set<String>()
+    internal var closing: Bool = false
 
     //MARK: - private properties
     fileprivate var autocompleteThreshold: Int?
@@ -40,9 +41,13 @@ open class AutoCompleteViewController: UIViewController {
             let textViewFrame = self.textField!.convert(self.textField!.frame, to: vc.view)
 
             self.height = self.delegate!.autoCompleteHeight()
-            self.view.frame = CGRect(x: textViewFrame.minX,
-                y: textViewFrame.maxY,
-                width: textViewFrame.width,
+            
+            let viewOffset: CGFloat = 24.0
+            let viewWidth = UIScreen.main.bounds.width - 24.0 * 2
+            
+            self.view.frame = CGRect(x: viewOffset,
+                y: textViewFrame.maxY - 3,
+                width: viewWidth,
                 height: self.height)
 
             self.tableView.register(self.delegate!.nibForAutoCompleteCell(), forCellReuseIdentifier: AutocompleteCellReuseIdentifier)
@@ -54,31 +59,41 @@ open class AutoCompleteViewController: UIViewController {
             self.cellHeight = self.delegate!.heightForCells()
             // not to go beyond bound height if list of items is too big
             self.maxHeight = UIScreen.main.bounds.height - textViewFrame.minY
+            
+            
         }
     }
     
-    func adjustViewsLocation() {
-        if let vc = delegate as? UIViewController {
-            let textViewFrame = self.textField!.convert(self.textField!.frame, to: vc.view)
-            self.height = self.delegate!.autoCompleteHeight()
-            self.view.frame = CGRect(x: textViewFrame.minX,
-                                     y: textViewFrame.maxY,
-                                     width: textViewFrame.width,
-                                     height: self.height)
-            self.maxHeight = UIScreen.main.bounds.height - textViewFrame.minY
-            
+    public func adjustViewsLocation() {
+        if !closing {
+            if let vc = delegate as? UIViewController {
+                let textViewFrame = self.textField!.convert(self.textField!.frame, to: vc.view)
+                let viewOffset: CGFloat = 24.0
+                let viewWidth = UIScreen.main.bounds.width - 24.0 * 2
+                
+                self.height = self.delegate!.autoCompleteHeight()
+                self.view.frame = CGRect(x: viewOffset,
+                                         y: textViewFrame.maxY - 3,
+                                         width: viewWidth,
+                                         height: self.height)
+                self.maxHeight = self.delegate!.autoCompleteHeight()
+                self.view.customShapeForAutocomplete(radius: 3.0)
+            }
         }
     }
 
     //MARK: - private methods
     @objc func textDidChange(_ textField: UITextField) {
+        self.closing = false
         let numberOfCharacters = textField.text?.count
         if let numberOfCharacters = numberOfCharacters {
             if numberOfCharacters > self.autocompleteThreshold! {
-                self.view.isHidden = false
                 guard let searchTerm = textField.text else { return }
                 let newItems = self.delegate!.autoCompleteItemsForSearchTerm(searchTerm)
                 let oldItems = self.autocompleteItems
+                
+                self.view.isHidden = newItems.count == 0
+                
                 self.autocompleteItems = newItems
                 UIView.animate(withDuration: self.animationDuration,
                     delay: 0.0,
@@ -103,14 +118,12 @@ open class AutoCompleteViewController: UIViewController {
                     }
                 }
                 
-                
                 var insertedIndexPaths = [IndexPath]()
                 for i in stride(from: 0, to: newItems.count, by: 1) {
                     if !currentSet.contains(newItems[i].text) {
                         insertedIndexPaths.append(IndexPath(row: i, section: 0))
                     }
                 }
-                
                 
                 currentSet = newSet
                 
@@ -134,3 +147,26 @@ open class AutoCompleteViewController: UIViewController {
     }
 
 }
+
+extension UIView {
+    
+    func customShapeForAutocomplete(radius: CGFloat) {
+        self.layer.mask = nil
+        let width = self.bounds.width
+        let height = self.bounds.height
+        let path = UIBezierPath()
+        path.move(to: CGPoint.zero)
+        path.addQuadCurve(to: CGPoint(x: radius, y: radius), controlPoint: CGPoint(x: 0, y: radius))
+        path.addLine(to: CGPoint(x: width - radius, y: radius))
+        path.addQuadCurve(to: CGPoint(x: width, y: 0), controlPoint: CGPoint(x: width, y: radius))
+        path.addLine(to: CGPoint(x: width, y: height - radius))
+        path.addQuadCurve(to: CGPoint(x: width - radius, y: height), controlPoint: CGPoint(x: width, y: height))
+        path.addLine(to: CGPoint(x: radius, y: height))
+        path.addQuadCurve(to: CGPoint(x: 0, y: height - radius), controlPoint: CGPoint(x: 0, y: height))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        self.layer.mask = mask
+        self.layer.masksToBounds = false
+    }
+}
+
