@@ -8,20 +8,22 @@
 
 import UIKit
 open class Autocomplete {
-    open class func setupAutocompleteForViewcontroller<T: UIViewController>(_ viewController: T) where T: AutocompleteDelegate {
+    open class func setupAutocompleteForViewcontroller<T: UIViewController>(_ viewController: T) -> AutoCompleteViewController where T: AutocompleteDelegate  {
         let autoCompleteViewController = initAutoCompleteVC()
         autoCompleteViewController.delegate = viewController
-
         setupUI(autoCompleteViewController, parentViewController: viewController)
+        return autoCompleteViewController
 
     }
-    open class func setupAutocompleteForViewcontrollerWithDetachedDelegate(_ viewController: UIViewController, delegate:AutocompleteDelegate) {
+    open class func setupAutocompleteForViewcontrollerWithDetachedDelegate(_ viewController: UIViewController, delegate:AutocompleteDelegate) -> AutoCompleteViewController {
         let autoCompleteViewController = initAutoCompleteVC()
         autoCompleteViewController.delegate = delegate
         
         setupUI(autoCompleteViewController, parentViewController: viewController)
+        return autoCompleteViewController
         
     }
+    
     
     fileprivate class func initAutoCompleteVC() -> AutoCompleteViewController {
         let podBundle: Bundle = Bundle(for: Autocomplete.self)
