@@ -36,22 +36,38 @@ open class AutoCompleteViewController: UIViewController {
 
         self.view.isHidden = true
         self.textField = self.delegate!.autoCompleteTextField()
+        if let vc = delegate as? UIViewController {
+            let textViewFrame = self.textField!.convert(self.textField!.frame, to: vc.view)
 
-        self.height = self.delegate!.autoCompleteHeight()
-        self.view.frame = CGRect(x: self.textField!.frame.minX,
-            y: self.textField!.frame.maxY,
-            width: self.textField!.frame.width,
-            height: self.height)
+            self.height = self.delegate!.autoCompleteHeight()
+            self.view.frame = CGRect(x: textViewFrame.minX,
+                y: textViewFrame.maxY,
+                width: textViewFrame.width,
+                height: self.height)
 
-        self.tableView.register(self.delegate!.nibForAutoCompleteCell(), forCellReuseIdentifier: AutocompleteCellReuseIdentifier)
+            self.tableView.register(self.delegate!.nibForAutoCompleteCell(), forCellReuseIdentifier: AutocompleteCellReuseIdentifier)
 
-        self.textField?.addTarget(self, action: #selector(UITextInputDelegate.textDidChange(_:)), for: UIControl.Event.editingChanged)
-        self.autocompleteThreshold = self.delegate!.autoCompleteThreshold(self.textField!)
-        self.cellDataAssigner = self.delegate!.getCellDataAssigner()
+            self.textField?.addTarget(self, action: #selector(UITextInputDelegate.textDidChange(_:)), for: UIControl.Event.editingChanged)
+            self.autocompleteThreshold = self.delegate!.autoCompleteThreshold(self.textField!)
+            self.cellDataAssigner = self.delegate!.getCellDataAssigner()
 
-        self.cellHeight = self.delegate!.heightForCells()
-        // not to go beyond bound height if list of items is too big
-        self.maxHeight = UIScreen.main.bounds.height - self.view.frame.minY
+            self.cellHeight = self.delegate!.heightForCells()
+            // not to go beyond bound height if list of items is too big
+            self.maxHeight = UIScreen.main.bounds.height - textViewFrame.minY
+        }
+    }
+    
+    func adjustViewsLocation() {
+        if let vc = delegate as? UIViewController {
+            let textViewFrame = self.textField!.convert(self.textField!.frame, to: vc.view)
+            self.height = self.delegate!.autoCompleteHeight()
+            self.view.frame = CGRect(x: textViewFrame.minX,
+                                     y: textViewFrame.maxY,
+                                     width: textViewFrame.width,
+                                     height: self.height)
+            self.maxHeight = UIScreen.main.bounds.height - textViewFrame.minY
+            
+        }
     }
 
     //MARK: - private methods
